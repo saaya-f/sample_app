@@ -8,13 +8,16 @@ class TodolistsController < ApplicationController
     # データをDBに保存するためのsaveメソッド実行
     list.save
     # トップ画面へリダイレクト
-    redirect_to '/top'
+    redirect_to todolist_path(list.id)
   end
 
   def index
     @lists = List.all
   end
-  
+
+  def show
+    @list = List.find(params[:id])
+  end
   private
   # ストロングパラメータ：マスアサインメント傍若生を防ぐ境界線
   # ここから下の行はメソッド呼出し制限をかけられ,
