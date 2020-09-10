@@ -18,6 +18,17 @@ class TodolistsController < ApplicationController
   def show
     @list = List.find(params[:id])
   end
+
+  def edit
+    @list = List.find(params[:id])
+  end
+
+  def update
+    list = List.find(params[:id])
+    list.update(list_params)
+    redirect_to todolist_path(list.id)
+  end
+
   private
   # ストロングパラメータ：マスアサインメント傍若生を防ぐ境界線
   # ここから下の行はメソッド呼出し制限をかけられ,
