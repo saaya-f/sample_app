@@ -11,6 +11,10 @@ class TodolistsController < ApplicationController
     redirect_to '/top'
   end
 
+  def index
+    @lists = List.all
+  end
+  
   private
   # ストロングパラメータ：マスアサインメント傍若生を防ぐ境界線
   # ここから下の行はメソッド呼出し制限をかけられ,
