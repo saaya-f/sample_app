@@ -34,6 +34,6 @@ class TodolistsController < ApplicationController
   # ここから下の行はメソッド呼出し制限をかけられ,
   # アクションとして認識されない
   def list_params
-    params.require(:list).permit(:title, :body)
+    params.require(:list).permit(:title, :body, :image)
   end
 end

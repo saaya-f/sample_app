@@ -2,7 +2,10 @@
 <% @lists.each do |list| %>
   <p>タイトル</p>
   <span>
-    <!-- %= link_to 表示させるテキスト, "リンク先URL" --> 
+    <!-- %= link_to 表示させるテキスト, "リンク先URL" -->
     <%= link_to list.title, "todolist_path(list.id)" %>
   </span>
+  <p>画像</p>
+  <%= attachment_image_tag list, :image, format: 'jpeg', size: "100x100" %>
+
 <% end %>
