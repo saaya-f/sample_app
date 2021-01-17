@@ -41,6 +41,15 @@ describe "投稿のテスト" do
   end
 
   descibe "一覧画面(todolists_path)のテスト" do
+    before do
+      visit todolists_path
+    end
+    context "一覧の表示とリンクの確認" do
+      it "一覧表示画面に投稿されたものが表示されているか" do
+        expect(page).to have_content list.title
+        expect(page).to have_link list.title
+      end
+    end
   end
 
   descibe "詳細画面(todolist_path)のテスト" do
