@@ -53,6 +53,29 @@ describe "投稿のテスト" do
   end
 
   descibe "詳細画面(todolist_path)のテスト" do
+    before do
+      visit todolist_path(list)
+    end
+    context "表示のテスト" do
+      it "削除リンクが存在しているか" do
+        expect(page).to have_link '削除'
+      end
+      it "編集リンクが存在しているか" do
+        expect(page).to have_link '編集'
+      end
+    end
+    context "リンクの遷移先の確認" do
+      it "編集の遷移先は編集画面か" do
+        edit_link = find_all('a')[0]
+        edit_link.click
+        expect(current_path).to eq('/todolists/' + list.id.to_s + '/edit')
+      end
+    end
+    context "list削除のテスト" do
+      it "listの削除" do
+        expect{ list.destroy }.to change{ List.count }.by(-1)
+      end
+    end
   end
 
   descibe "編集画面(edit_todolist_path)のテスト" do
