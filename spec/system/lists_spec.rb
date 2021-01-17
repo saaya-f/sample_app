@@ -34,7 +34,7 @@ describe "投稿のテスト" do
       it "投稿後のリダイレクト先は正しいか" do
         fill_in 'list[title]', with: Fakker::Lorem.characters(number:5)
         fill_in 'list[body]', with: Fakker::Lorem.characters(number:20)
-        click_button is '投稿'
+        click_button '投稿'
         expect(page).to have_current_path todolist_path(List.last)
       end
     end
@@ -79,5 +79,25 @@ describe "投稿のテスト" do
   end
 
   descibe "編集画面(edit_todolist_path)のテスト" do
+    before do
+      visit edit_todolist_path(list)
+    end
+    context "表示の確認" do
+      it "編集前のタイトルと本文がフォームに表示(セット)されている" do
+        expect(page).to have_field 'list[title]', with: list.title
+        expect(page).to have_field 'list[body]', with: list.body
+      end
+      it "保存ボタンが表示される" do
+        expect(page).to have_button '保存'
+      end
+    end
+    context "更新処理に関するテスト" do
+      it "更新後のリダイレクト先は正しいか" do
+        fill_in 'list[title]', with: Fakker::Lorem.characters(number:5)
+        fill_in 'list[body]', with: Fakker::Lorem.characters(number:20)
+        click_button '保存'
+        expect(page).to have_current_path todolist_path(List)
+      end
+    end
   end
 end
